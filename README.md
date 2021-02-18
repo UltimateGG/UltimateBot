@@ -38,3 +38,5 @@ The backend was fully automated purchases, using the PayPal API, unlike other se
 
 # IMPORTANT
 You may do whatever you want with the code under the regulations of the GNU license, but I will NOT be available to help you fix any issues nor setup the bot, the repo is archived for a reason and I do not like working on this project anymore. There are many bugs within the actual bot, as stated, this was my first code project ever.
+
+I plan to release more of my factions/code projects in general. I own most of the faction Evo's bots, once the faction is done or I am ready I will probably release EvoCheck (ftop graphs, player activity graphs, tracker bot, moderation, etc) along with an alt manager. Probably sometime far in the future.
