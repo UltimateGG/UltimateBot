@@ -1,0 +1,91 @@
+extends ./alert.pug
+block content
+  doctype html
+  head
+    meta(name='keywords' content='ultimatebot, minecraft bot, factions bot, wall checking, minecraft to discord, ultimate bot')
+    meta(name='description' content='Factions wall checking bot with many features intended for CosmicPVP. Convert ingame commands into discord.')
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+    link(href='https://unpkg.com/aos@2.3.1/dist/aos.css' rel='stylesheet')
+    script(src='https://unpkg.com/aos@2.3.1/dist/aos.js')
+    style
+      include ./style.css
+    style
+      include ./pstyle.css
+    script(src='https://kit.fontawesome.com/3678a0ca48.js' crossorigin='anonymous')
+    script(src='https://www.google.com/recaptcha/api.js')
+    link(href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap' rel='stylesheet')
+    link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+    link(rel='icon' href='/img/favicon.ico' type='image/x-icon')
+    title UltimateBot - Login
+  script.
+    $(document).ready(function() {
+    AOS.init();
+    });
+
+  if user
+    div(class="alert alert-danger" style="margin:1em;") You are already logged in. Redirecting...
+    script.
+      alert('You are already logged in.');
+      window.location.replace("/");
+
+  // Navbar
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark(style='background-color:#191919 !important;')
+    a.navbar-brand(href='/') <img src="/img/favicon.png" width='25' height='25'> UltimateBot
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link(href='/') Home
+        li.nav-item
+          a.nav-link(href='/users/login' style='background-color:#303030 !important;') Login
+        li.nav-item
+          a.nav-link(href='/users/register') Register
+  div(style='margin-bottom:4em;')
+  // Login Form
+  .container
+    .row
+      .col-md-12
+        != messages('message', locals)
+        if errors
+          each error, i in errors
+            div(class="alert alert-danger") #{error.msg}
+        div(data-aos="fade-right" data-aos-duration="800" data-aos-delay="200")
+          h1 Login
+        form(method='POST', action='/users/login')
+          #form-group
+            label Username:
+            input.form-control(name='email', type='text')
+          #form-group
+            label Password:
+            input.form-control(name='password', type='password')
+            br
+          #form-group
+            div(class="g-recaptcha" data-sitekey="6LcgQMgUAAAAAO0Bn2aFglAo5ADtBRCl1WK1xXcp")
+          br
+          div(data-aos="fade-up" data-aos-duration="800" data-aos-delay="500")
+            input.btn.btn-primary(type='submit', value='Login')
+            a(href='/users/forgotpass' class="btn btn-danger" style="margin-left:1em;")  Forgot Password
+          br
+          p Don't have an account?
+            a(href='/users/register')  Register One
+  // Footer
+  div(style='margin-top:50%;')
+  .container-fluid
+    .row
+      div.col-md-12.footer
+        center
+          p
+            | Copyright &copy; UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated.
+            strong
+              a(href='/tos')  TOS
+            |  |
+            strong
+              a(href='/support')  Support
+  script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')

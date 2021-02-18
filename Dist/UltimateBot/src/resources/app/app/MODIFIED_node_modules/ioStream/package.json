@@ -1,0 +1,11 @@
+{
+  "name": "iostream",
+  "version": "1.0.0",
+  "description": "Read and output files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zach159",
+  "license": "ISC"
+}

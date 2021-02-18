@@ -1,0 +1,32 @@
+{
+  "name": "UltimateBot",
+  "version": "1.0.0",
+  "description": "Factions discord bot.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "3.1.13",
+    "electron-builder": "^22.3.2"
+  },
+  "dependencies": {
+    "ansi-to-html": "^0.6.13",
+    "dotenv": "^8.2.0",
+    "edit-json-file": "^1.4.0",
+    "fs": "^0.0.1-security",
+    "jquery": "^3.4.1",
+    "path": "^0.12.7",
+    "pm2": "^4.4.0",
+    "strip-indent": "^3.0.0",
+    "url": "^0.11.0",
+    "util": "^0.12.1"
+  },
+  "build": {
+    "appId": "pw.ultimatebot",
+    "win": {
+      "target": "nsis",
+      "icon": "build/favicon.ico"
+    }
+  }
+}

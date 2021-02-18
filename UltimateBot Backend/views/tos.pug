@@ -1,0 +1,120 @@
+doctype html
+head
+  meta(name='keywords' content='ultimatebot, minecraft bot, factions bot, wall checking, minecraft to discord, ultimate bot')
+  meta(name='description' content='Factions wall checking bot with many features intended for CosmicPVP. Convert ingame commands into discord.')
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+  link(href='https://unpkg.com/aos@2.3.1/dist/aos.css' rel='stylesheet')
+  script(src='https://unpkg.com/aos@2.3.1/dist/aos.js')
+  style
+    include ./style.css
+  style
+    include ./tos.css
+  script(src='https://kit.fontawesome.com/3678a0ca48.js' crossorigin='anonymous')
+  link(href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap' rel='stylesheet')
+  link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+  link(rel='icon' href='/img/favicon.ico' type='image/x-icon')  
+  title UltimateBot - Terms of Service
+  link(rel='stylesheet' href='style.css')
+script.
+  $(document).ready(function() {
+  AOS.init();
+  });
+#top
+// Navbar
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark(style='background-color:#191919 !important;')
+  a.navbar-brand(href='/') <img src="/img/favicon.png" width='25' height='25'> UltimateBot
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.nav.navbar-nav.navbar-right.ml-auto
+      li.nav-item
+        a.nav-link(href='/'  style='margin-right:0.5em;') Home 
+      if user
+        li.nav-item
+          a.nav-link(href='/dashboard') Dashboard
+        li.nav-item
+          a.nav-link.btn-danger(href='/users/logout') Logout
+      else
+        li.nav-item
+          a.nav-link(href='/users/login') Login 
+        li.nav-item
+          a.nav-link(href='/users/register') Register
+// TOS Content
+div(style='margin: 3em;')
+  .card(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='0')
+    div
+      a(style='font-weight: bold; font-size: 26px;') 1. GENERAL
+    hr
+    div(style='margin: 10px 50px 50px; 50px;')
+      p
+        | 1. We are 
+        b NOT
+        |  associated with Mojang, Microsoft or Minecraft.net and we are not representing them.
+      p
+        | 2. We reserve the right to change the Terms of Service at any time without notifying the users. The users have to keep themselves up to date about the latest version of the Terms of Service.
+      p 3. We are not held responsible for any misuse of our service.
+      p 4. You are not allowed to spam/abuse any functions of our service.
+  .card(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='500')
+    div
+      a(style='font-weight: bold; font-size: 26px;') 2. LICENSE
+    hr
+    div(style='margin: 10px 0 50px 50px;')
+      p
+        | 1. You are not allowed to deobfuscate or decompile the application in any way, if you do your license will be terminated.
+      p
+        | 2. You are not allowed to share/resell the application, if you do share the application your license will be terminated.
+      p
+        | 3. You are not allowed to refund your money without our knowledge and acceptance. The money will be refunded only when the support investigates your case and deams it to be reasonable to refund your money.
+      p
+        | 4. The license is lifetime, however if our servers go down you will not be able to run the application for security reasons.
+      p
+        | 5. If you chargeback your money without the approval of the support your license will be terminated and a scam report will be opened.
+      p
+        | 6. If the application is stolen from you, you will be held responsible to what is done to the stolen files.
+      p 7. We are not responsible for the accounts you use on the bot.
+      p 8. We are not responsible on how you use the application. 
+  .card(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='0')
+    div
+      a(style='font-weight: bold; font-size: 26px; margin-top: 600px;') 3. PAYMENT
+    hr
+    div(style='margin: 10px 0 50px 50px;')
+      p
+        | 1. You must be over 18 and have the paypal account holders permission to purchase.
+      P
+        | 2. You must have accessed the purchase gateway through being logged in on our website. 
+      P
+        | 3. You are purchasing a digital item and will NOT receive a physical item, nothing will be shipped.
+  .card(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='500')
+    div
+      a(style='font-weight: bold; font-size: 26px; margin-top: 600px;') 4. REFUNDS
+    hr
+    p Refunds are only provided to users who meet the requirements.
+    div(style='margin: 10px 0 0 50px;')
+      p 1. Requested a refund within 3 days of purchasing the application.
+      p 2. Your license is not banned/suspended.
+      p 3. The application has been not used at all or used on one computer.
+      p 4. You have not opened a chargeback on paypal.
+      p
+        | There are special cases, and you must contact 
+        a(href='/support') support
+        |  to see if your reasons are sufficient for a refund. If you attempt to open a chargeback dispute, even after the dispute is closed and no matter the outcome, we reserve the right to revoke your license and terminate the associated account.
+// Footer
+div(style='margin-top:2em;')
+.container-fluid
+  .row
+    .col-md-12.footer
+      center
+        p
+          | Copyright &copy; UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated. | 
+          strong
+            a(href='#' style='color:#0062c4;') TOS
+          |  | 
+          strong
+            a(href='/support') Support
+script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
+script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')

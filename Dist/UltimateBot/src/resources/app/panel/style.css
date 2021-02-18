@@ -1,0 +1,122 @@
+.btn:focus,.btn:active {
+   outline: none !important;
+   box-shadow: none;
+}
+
+html {
+	outline:0;
+}
+
+
+.console {
+	 /*overflow-y:scroll;
+     overflow-x: hidden;*/
+	 word-wrap: break-word;
+	 overflow: auto;
+	 border-top-left-radius: 15px;
+	 border-top-right-radius: 15px;
+ }
+
+.consoleCmd {
+	overflow: hidden;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+hr {
+	background-color:#36393F;
+	color:#dcddde;
+	height: 1px;
+	width:100%;
+	padding:0;
+	margin-bottom:10px;
+}
+
+body {
+	background-color:#36393F;
+	color:#dcddde;
+}
+
+.dark {
+	background-color:#000;
+	border:none;
+	margin:0;
+	box-shadow: none;
+	color:white !important;
+}
+
+.sdark {
+	background-color:#000;
+	border:none;
+	margin:0;
+	box-shadow: none;
+	color:white;
+}
+
+.sdark:active {
+	background-color:#000;
+	border:none;
+	margin:0;
+	outline:0;
+	box-shadow: none;
+	color:white;
+}
+
+.sdark:focus {
+	background-color:#000;
+	border:none;
+	margin:0;
+	outline:0;
+	box-shadow: none;
+	color:white;
+}
+
+.dark:active {
+	background-color:#000;
+	border:none;
+	margin:0;
+	outline:0;
+	box-shadow: none;
+	color:white !important;
+}
+
+.dark:focus {
+	background-color:#000;
+	border:none;
+	margin:0;
+	outline:0;
+	box-shadow: none;
+	color:white !important;
+}
+
+.actButtons {
+	float: right;
+	width: 7rem;
+}
+
+.actButtonsD {
+	float: right;
+	width: 5rem;
+}
+
+.custom-select {
+	box-shadow: none;
+	outline:0;
+	border:none;
+}
+
+.custom-select:focus {
+	box-shadow: none;
+	outline:0;
+	border:none;
+}
+
+.custom-select:active {
+	box-shadow: none;
+	outline:0;
+	border:none;
+}
+
+.hoverStyle:hover {
+	cursor: pointer;
+}

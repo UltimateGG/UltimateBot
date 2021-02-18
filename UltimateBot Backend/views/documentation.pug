@@ -1,0 +1,757 @@
+extends ./alert.pug
+block content
+  doctype html
+  head
+    meta(name='keywords' content='ultimatebot, minecraft bot, factions bot, wall checking, minecraft to discord, ultimate bot')
+    meta(name='description' content='Factions wall checking bot with many features. Convert ingame commands into discord.')
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+    link(href='https://unpkg.com/aos@2.3.1/dist/aos.css' rel='stylesheet')
+    script(src='https://unpkg.com/aos@2.3.1/dist/aos.js')
+    style
+      include ./style.css
+    script 
+      include ./search.js
+    script(src='https://kit.fontawesome.com/3678a0ca48.js' crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap' rel='stylesheet')
+    link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+    link(rel='icon' href='/img/favicon.ico' type='image/x-icon')
+    title UltimateBot - Documentation
+    link(rel='stylesheet' href='style.css')
+  script.
+    $(document).ready(function() {
+    AOS.init();
+    });
+  #top
+  // Navbar
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark(style='background-color:#191919 !important;')
+    a.navbar-brand(href='/') <img src="/img/favicon.png" width='25' height='25'> UltimateBot
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right.ml-auto
+        li.nav-item
+          a.nav-link(href='/'  style='margin-right:0.5em;') Home
+        if user
+          li.nav-item
+            a.nav-link(href='/dashboard') Dashboard
+          li.nav-item
+            a.nav-link.btn-danger(href='/users/logout') Logout
+        else
+          li.nav-item
+            a.nav-link(href='/users/login') Login
+          li.nav-item
+            a.nav-link(href='/users/register') Register
+
+  div(style='margin-bottom:2em;')
+  // All Commands Documentation
+  .container-fluid
+    .row.nosearch
+      .col-md-12
+        #top
+        h1 Full Command Documentation
+        h5 See detailed info on all the commands the bot has.
+        p
+          strong Warning:
+          |  Remember if you changed the prefix of your bot you should ignore the &apos;/&apos; before each of these commands and use your prefix.
+          br
+          |  The roles you may see are &apos;Admin&apos;, &apos;Trusted&apos;, &apos;Member&apos;, &apos;Bank&apos;, &apos;Rotate&apos; and remember these would be what you set the role names to in the config.
+          br
+          strong
+            | &lt;&gt; Means required
+            br
+            |  [ ] Means optional.
+        h5
+          | Quick Jump:
+          a(href='#settings' style='margin-left:0.5em;') Settings
+          a(href='#bottom' style='margin-left:1em;')  Bottom
+        br
+        div(style='margin-bottom:1em;')
+        h5 Select:
+        select(class="form-control form-control-lg" style='width:50%;')
+          option Jump to...
+        script.
+          $(document).ready(function() {
+          var select = document.getElementsByTagName("select")[0];
+          var ids = document.querySelectorAll("[id]");
+          
+          ids.forEach(id => {
+          if (id.id === 'navbarSupportedContent' || id.id === 'top' || id.id === 'searchCmd') {return;}
+          var option = document.createElement("option");
+          option.text = id.id;
+          select.add(option);
+          });
+          
+          select.addEventListener('change', function() {
+          if (select.value === 'Jump to...') {return;}
+          location.hash = "#" + select.value;
+          });
+          });
+        br
+        br
+        h5 Search: 
+        input.form-control#searchCmd(style='width: 50%;' placeholder='Search...')
+        div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #help
+        h3 /help
+        hr
+        p
+          | Discord bot shows a summed up version of this list. These commands are more detailed.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #restart
+        h3 /restart
+        hr
+        p
+          | This reboots all of the alt files, and the discord bot. If your alts get disconnected from the server this is a great way to fix it. The alts should be connected again within 30 seconds. Refer to the /connect command if the bot is stuck in the hub.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #balance
+        h3 /bal &lt;username&gt;
+        hr
+        p
+          | Get the balance of the username or IGN you specified. If the player was not found it will return as a red embed saying so, this means the player has never joined the server.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #ftop
+        h3 /ftop
+        hr
+        p
+          | Get the server&#39;s top faction wealth. Sometimes this does not return anything, the server may have an error and ftop might not be working. This usually happens after a big raid occured.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #ftop
+        h3 /autoftop &lt;minutes&gt;
+        hr
+        p
+          | Auto posts the server f-top in the #ftop channel every set amount of minutes.
+          br
+          br
+          | This command can only be used by the &apos;Trusted&apos; and &apos;Admin&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #ftop
+        h3 /autofwealth &lt;minutes&gt; &#40;CosmicPvP&#41;
+        hr
+        p
+          | Auto posts the planet&#39;s f-wealth in the #ftop channel every set amount of minutes.
+          br
+          br
+          | This command can only be used by the &apos;Trusted&apos; and &apos;Admin&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #fwealth
+        h3 /fwealth &#40;CosmicPvP&#41;
+        hr
+        p
+          | Get the planets top faction wealth count. Sometimes this does not return anything, the server may have an error and fwealth might not be working. This usually happens after a big raid occured.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #fwho
+        h3 /fwho &lt;faction or player&gt;
+        hr
+        p
+          | Get the /f show or /f who info on the faction or player specified.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #weewoo
+        h3 /weewoo
+        hr
+        p
+          | Once this command is run, a message is posted in the logs channel saying who enabled the spam. The bot spam mention the roles or none based on what you configured /set to. A message is posted every few seconds in the channel weewoo channel name set in the config.. Refer to /safe below. You may also /msg the in-game bot &apos;weewoo&apos;.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #safe
+        h3 /safe
+        hr
+        p
+          | Refer to /weewoo above, this will stop the spam, and this command can be ran in any channel, not just where the spam occurs. You may also /msg the in-game bot &apos;safe&apos;.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+          br
+          strong
+            | Note: The &apos;Trusted&apos; roles main purpose is for /weewoo and /safe, so it is recommended that you give this to most members incase you are getting raided.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #sendchat
+        h3 /sendchat &lt;message&gt; &lt;alt#&gt;
+        hr
+        p
+          | This makes the bot specified run the message, if you dont have a / in the message parameter it will run as chat. At the end of the message you must add &apos;alt#&apos; Simply run /sendchat in discord to see which alt# controls which account.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #whitelist
+        h3 /whitelist &lt;add/remove&gt; &lt;@DiscordUser&gt; &lt;Username&gt OR /whitelist &lt;self&gt;;
+        hr
+        p
+          | This binds the discord user you mention to their minecraft username/ign. This allows the user to be able to check walls by messaging the ingame bot &apos;/checked&apos; or &apos;checked&apos;. They will receive a check score which links to their Discord account. Refer to /leaderboard or /checks for more info on checks.
+          | If the user does /whitelist self, it sends them a key which they can use to link themselves to the bot without an admin having to.
+          br
+          br
+          | The /whitelist self command can only be used by the &apos;Member&apos; and up roles.
+          | The /whitelist add/remove commands can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+        p
+          strong /whitelist [list]
+        p
+          | Shows the raw whitelist file containing all users added. If for some reason your whitelist file goes over 2k characters, it can not be sent and you may need to open the whitelist.txt file with notepad++ to view it.
+        p
+          strong /whitelist [clear]
+        p
+          | Deletes all users off of the whitelist.
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+        p
+          strong /whitelist [prune]
+        p
+          | Deletes all users off of the whitelist that are NOT currently in the discord.
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #find
+        h3 /find [username] &#40;CosmicPvP&#41;
+        hr
+        p
+          | This command posts to the
+          strong #find-channel
+          | ! This will output what planet the player is on (on cosmic) or if they are not online. Refer to /autofind for advanced search. The username is optional, if you do not set one it will find the main bots username.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #autofind
+        h3 /autofind &lt;add/remove&gt; &lt;username&gt; &#40;CosmicPvP&#41;
+        hr
+        p
+          | Adds or removes a user from the autofind list. Autofind will run /find plus the usernames of all players on the list and post back to #find-channel. You can change the interval of this (refer to settings section) with /afinterval. If the player is playing on a cannonplanet it will @everyone saying so.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+        p
+          strong /autofind [list]
+        p
+          | Shows the raw autofind file containing all users added. Use this to see who you can remove from the list (/autofind remove) -
+          b not
+          |  case sensitive
+        p
+          strong /autofind [toggle]
+        p
+          | Toggles if the bot finds the users every set interval.
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #connect
+        h3 /connect
+        hr
+        p
+          | This makes all alts and the main bot run the join command - Refer to settings /set joincommand.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #flist
+        h3 /flist [page]
+        hr
+        p
+          | This shows the server faction list with the factions containing the most online players.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #list
+        h3 /list
+        hr
+        p
+          | This shows the server player rank count. &#40;If this returns a lot of players it will not be added on your server&#41;
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #raid
+        h3 /raid &#40;CosmicPvP&#41;
+        hr
+        p
+          | This command will get the time until the next raid event, or if one is running show its info.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+        p
+          strong /raid [toggle]
+        p
+          | Toggles if raid event alerts are broadcasted before raid events start.
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #outpost
+        h3 /outpost
+        hr
+        p
+          | Gives in depth info about all the outpost&apos;s status.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+        p
+          strong /outpost [toggle]
+        p
+          | Toggles if outpost alerts are sent when your factions outpost is under attack. (Refer to settings /faction)
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #stronghold
+        h3 /stronghold or /sh &#40;CosmicPvP&#41;
+        hr
+        p
+          | Gives info on the strongholds.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+        p
+          strong /stronghold [toggle]
+        p
+          | Toggles if outpost alerts are sent when your factions stronghold is under attack.
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+        p
+          strong /stronghold [set] &lt;faction&gt;
+        p
+          | Sets the faction to monitor strongholds for.
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #broadcast
+        h3 /broadcast &lt;@role&gt; &lt;message&gt;
+        hr
+        p
+          | Broadcast will DM every user on the server that has the role you mentioned, the set message (As long as the user hasn&apos;t blocked the bot and has DMs enabled) It will remove the &apos;/broadcast @role&apos; part of the message.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #purge
+        h3 /purge &lt;#&gt;
+        hr
+        p
+          | Deletes the set number of messages from the channel the command was run in.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #mute
+        #unmute
+        h3 /[un]mute &lt;@user&gt;
+        hr
+        p
+          | This is a hard mute which revokes the mentioned users send messages permissions to every channel on the server, the only way they can type is if they have administrator permissions.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #say
+        h3 /say &lt;#channel&gt; &lt;message&gt;
+        hr
+        p
+          | The bot posts the message (minus the /say #channel part) in the channel you mentioned.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #checked
+        h3 /checked
+        hr
+        p
+          strong This command only works in the walls OR buffers channel.
+          |  - Marks the walls/bufffers as checked (Depending on what channel sent in) and gives the user +1 wall or buffer check. This stops the alerts from wall or buffer checking spam in-game and in discord.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles or whitelisted users..
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12  
+        #interval
+        h3 /&lt;wall/buffer&gt;interval &lt;minutes&gt;
+        hr
+        p
+          | Sets how often wall check or buffer check spam goes off
+          b  in minutes.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #checks
+        h3 /&lt;wall/buffer&gt;checks &lt;set&gt; &lt;@user&gt; &lt;# of checks&gt;
+        hr
+        p
+          | Sets the number of wall checks or buffer checks a user has, links to Minecraft username aswell. This updates the /leaderboard command.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #reset
+        h3 /reset
+        hr
+        p
+          | Resets
+          b  all
+          |  users wall check stats to
+          b  0
+          | . The leaderboard will be all zeros. Also resets all deposit data, and playtime data.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12 
+        #leaderboard
+        h3 /leaderboard &lt;walls/buffers/deposits/playtime&gt [page];
+        hr
+        p
+          | Shows leaderboards for buffer checks, wall checks, money deposited, and playtime.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #view
+        h3 /view &lt;@user&gt;
+        hr
+        p
+          | Shows the users check count, and their linked Minecraft username. Also shows if they are able to use /pay (see below) or not. Shows total money deposited, and total playtime.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #pay
+        h3 /pay &lt;username&gt; &lt;amount&gt;
+        hr
+        p
+          | Results show up in
+          strong #economy
+          |  channel. The in-game main bot pays the user the amount specified. This logs in the economy channel.
+          br
+          br
+          | This command can only be used by the &apos;Bank&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #rotate
+        h3 /rotate &lt;@user&gt; &lt;@user&gt;
+        hr
+        p
+          | Kicks the first set user and invites the second set user to the faction. This uses the whitelist to check whos discord is whos IGN.
+          br
+          br
+          | This command can only be used by the &apos;Rotate&apos; role - set in .env.      
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #grace
+        h3 /grace (Comp Only)
+        hr
+        p
+          | Gets how long until the grace period is over.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.            
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #shield
+        h3 /shield OR /shield &lt;set&gt; &lt;time-time&gt; OR /shield toggle
+        hr
+        p
+          | Either view if your shield is enabled, or set your shield times. Times are in 24 hr time and must be in the CST timezone! Shield toggle will disable if the shield will activate in your shield times.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; and up role. Mmebers can use the /shield command to view if shield is active.     
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #tracker
+        h3 /tracker &lt;add/remove&gt; &lt;username&gt;
+        hr
+        p
+          | Adds the IGN to the tracker list. This means when the player joins the server the bot is in, an alert will be sent in #ingame-chat, or if they leave a message will also be posted.
+          b This does work on any server.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+        p
+          strong /tracker [list]
+        p Shows all usernames/IGNs being tracked.
+        p
+          strong /tracker [toggle]
+        p
+          | Toggles if alerts are sent when someone on the tracker list joins or leaves the game.
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #task
+        h3 /task list | task add <intervalInMinutes> <returnsIngameOutput> <command> | task remove <id>
+        hr
+        p
+          | Automated tasks for the bot to run. Ingame output means if commands like /bal, /fwho, /flist will return output to the tasks channel.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #reactions
+        h3 /reactions &lt;messageLink&gt;
+        hr
+        p
+          | Gets a list of whitelisted users that DIDNT react to the set message. Use right click and copy message link to get a message link.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; and &apos;Trusted&apos; roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #away
+        h3 /away
+        hr
+        p
+          | Will send you an away form with questions asking your IGN, how long you will be gone, and why.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #online
+        h3 /online
+        hr
+        p
+          | Gets how many whitelisted users are online or offline.
+          br
+          br
+          | This command can only be used by the &apos;Member&apos; and up roles.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #apply
+        h3 /apply
+        hr
+        p
+          | Runs through all your set application questions from applicationquestions.json. Submits and puts reactions up to accept or deny. Gives a role on accepted and sends a custom message.
+          br
+          br
+          | This command can be used by anybody, unless they have a blacklisted role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #appquestion
+        h3 /appq &lt;add&gt; &lt;question&gt; | /appq &lt;remove&gt; &lt;questionNumber&gt; | /appq &lt;set&gt; &lt;questionNumber&gt; &lt;newQuestion&gt;
+        hr
+        p
+          | Edit your application questions without having to change the json file. To edit the color of the embeds though, you will have to change json, but it is harder to mess up.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #deposits
+        h3 /deposits [reset] | /deposits &lt;set&gt; &lt;@user&gt; &lt;amount&gt;
+        hr
+        p
+          | Reset all faction deposit data (From /pay) or set a users amount deposited.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #c
+        h3 /c &lt;name&gt; &lt;#channel&gt;
+        hr
+        p
+          | Sets a custom id for a bot channel. Run the command for channel options.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        h3 /settings
+        hr
+        p
+          | List of what settings you can configure on the bot.
+          br
+          br
+          strong All /settings commands can only be used by the &apos;Admin&apos; role.
+    .row
+      .col-md-12
+        h3(style='display:none;') Settings
+        hr(style='background-color:#000; height:2px;')
+        #settings
+        center
+          h1(style='font-size:5em;') Settings
+        center
+          h5(style='font-size:1em;') &apos;Admin&apos; role only for all.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #set 
+        h3 /set &lt;option&gt &lt;value&gt;
+        hr
+        p
+          | This command sets MANY settings, and they cannot all be listed here. Please run the command in your discord to see all options. Run /set <option> with no value to see help for that option. Example options are: discordwallsmessage, discordbuffersmessage, timezone, notificationDelay. Also set your join command here. /set joincommand.
+    div(style='margin-bottom:2.5em;')
+    .row
+      .col-md-12
+        #setup
+        h3 /setup
+        hr
+        p
+          | When you first add the bot and turn it on in your discord server, run this command, as it has lots of useful info and will create all the channels it uses.
+          strong You can not rename these channels. Make sure to edit their permissions!
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12  
+        #prefix
+        h3 /prefix &lt;prefix&gt;
+        hr
+        p
+          | Sets the prefix before every command that the bot uses. This takes affect immediately. Example: /prefix m! - m!help
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12  
+        #viewsettings
+        h3 /viewsettings &lt;page&gt;
+        hr
+        p
+          | View all settings the bot has currently registered. Restart must happen for settings to update. Some settings cannot be changed by a user.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #toggle
+        h3 /toggle &lt;walls/buffers/ftop/fwealth&gt;
+        hr
+        p
+          | Toggle wall or buffer checks. Also toggles auto ftop or fwealth(Cosmic) posts.
+          br
+          br
+          | This command can only be used by the &apos;Admin&apos; role.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #afinterval
+        h3 /afinterval &lt;interval in minutes&gt; &#40;CosmicPvP&#41;
+        hr
+        p Sets how often in minutes the bot checks the autofind list. Refer to /autofind.
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #tps
+        h3 /tps &lt;set&gt; &lt;#&gt;
+        hr
+        p
+          | TPS is checked every 5 minutes, set this to send an alert (as long as TPS alerts are enabled) when the server goes below your threshold. Example /tps set 18.22
+    div(style='margin-bottom:2em;')
+    .row
+      .col-md-12
+        #faction
+        h3 /faction &lt;faction name&gt;
+        hr
+        p
+          | Sets which faction to monitor outposts for, when any outpost goes under attack with that faction name, it will spam discord and in-game chat (as long as outpost alerts are enabled)
+    div(style='margin-bottom:2.3em;')
+    .row
+      .col-md-12
+        p
+          b End commands and settings.
+        #bottom
+        a(href='#top') Back to top
+        a(href='/' style='margin-left:1em;') Home
+  // Footer
+  div(style='margin-top:2em;')
+  .container-fluid
+    .row
+      .col-md-12.footer
+        center
+          p
+            | Copyright &copy; UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated.
+            strong
+              a(href='/tos')  TOS
+            |  |
+            strong
+              a(href='/support')  Support
+  script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')

@@ -1,0 +1,333 @@
+//extends ./alert.pug
+block content
+  doctype html
+  head
+    meta(name='keywords' content='ultimatebot, minecraft bot, factions bot, wall checking, minecraft to discord, ultimate bot')
+    meta(name='description' content='Factions wall checking bot with many features. Convert ingame commands into discord.')
+    meta(name="msvalidate.01" content="F04DB19AC20EF2E3909AE3553710A0FD")
+    link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+    link(rel='icon' href='/img/favicon.ico' type='image/x-icon')  
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+    link(href='https://unpkg.com/aos@2.3.1/dist/aos.css' rel='stylesheet')
+    script(src='https://unpkg.com/aos@2.3.1/dist/aos.js')
+    style
+      include ./style.css
+    script(src='https://kit.fontawesome.com/3678a0ca48.js' crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap' rel='stylesheet')
+    title UltimateBot - Home
+  script.
+    $(document).ready(function() {
+    AOS.init();
+    });
+  #top
+  // Navbar
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark(style='background-color:#191919 !important; z-index:3;')
+    a.navbar-brand(href='/') <img src="/img/favicon.png" width='25' height='25'> UltimateBot
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right.ml-auto
+        li.nav-item
+          a.nav-link(href='/'  style='background-color:#303030 !important; margin-right:0.5em;') Home 
+        if user
+          li.nav-item
+            a.nav-link(href='/dashboard') Dashboard
+          li.nav-item
+            a.nav-link.btn-danger(href='/users/logout') Logout
+        else
+          li.nav-item
+            a.nav-link(href='/users/login') Login 
+          li.nav-item
+            a.nav-link(href='/users/register') Register
+  // Header
+  header.v-header.vcontainer 
+    .fullscreen-video-wrap
+      video(src='./img/showcase.mp4' autoplay="true" loop="true" muted="true")
+    .header-overlay 
+    .header-content 
+      .zoom(data-aos='zoom-in' data-aos-duration='1000')
+        h1.headertext UltimateBot
+      p Wall and buffer checking bot with in-game to discord connectivity.
+      btn.btn.btn-primary.cta(style='margin-right: 3vw;' onclick="window.location='/users/register'").grow Register
+      btn.btn.btn-outline-primary.cta.grow(onclick="window.location='/users/login'") Login
+  .container-fluid
+    .row
+      .col-md-12
+        center
+          br
+          a(href='https://discord.gg/dvu54pE' target='_blank' id='dcimg')
+            img(src='../img/discord.png' alt='Discord' style='width:auto; max-width: 90%;' data-toggle="tooltip")
+          br
+          small Click the image to join the discord.
+  // Features Cards
+  div(style='margin-bottom:4%;')
+  .container-fluid.features-cards
+    .row
+      .col-md-12
+        center
+          h1 Features
+        .arrow.bounce
+          center
+            a#downicon(href='#features')
+              i.fas.fa-angle-down.fa-5x
+        #features
+    div(style='margin-top:2em;')
+    .row
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000')
+          .card
+            img.card-img-top.img-fluid.img-fluid(src='../img/custombot.png' alt='Custom Discord Bot')
+            img.card-img-top.img-fluid.img-fluid(src='../img/custom2.png' alt='Custom Discord Bot')
+            .card-body
+              h5.card-title Custom Discord Bot
+              p.card-text
+                | Customize your discord bot app, and simply input your token. Set any game the bot is playing with /game!
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='300')
+          .card
+            img.card-img-top.img-fluid(src='../img/ftop.png' alt='Ftop output running in discord.')
+            .card-body
+              h5.card-title Ingame Commands To Discord
+              p.card-text
+                | Get in-game outputs to discord instantly, through commands in discord. Full command documentation here:
+              a.btn.btn-primary.float-right(href='/documentation') Commands
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='600')
+          .card
+            img.card-img-top.img-fluid(src='../img/interval.png' alt='Custom wall checking alert interval.')
+            img.card-img-top.img-fluid(src='../img/togglechecks.png' alt='Toggling wall checks.')
+            img.card-img-top.img-fluid(src='../img/custommsg.png' alt='Custom wall checking alert messages.')
+            img.card-img-top.img-fluid(src='../img/pings.png' alt='Custom wall checking alert pings.')
+            .card-body
+              h5.card-title Custom Wall + Buffer Checking
+              p.card-text
+                | Change the wall/buffer checking alert interval to anything with a simple and quick command. You can also disable wall/buffer checking alerts. Check alert messages in-game and discord are configurable via /set.
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='900')
+          .card
+            img.card-img-top.img-fluid(src='../img/leaderboard.png' alt='Wall checking leaderboard.')
+            img.card-img-top.img-fluid(src='../img/checked.png' alt='Wall checking check counter.')
+            img.card-img-top.img-fluid(src='../img/checkedimg.png' alt='Wall checking by msging ingame bot.')
+            img.card-img-top.img-fluid(src='../img/checkedingame.png' alt='Wall checking by msging ingame bot (posted in discord)')
+            .card-body
+              h5.card-title Wall Checking Stats
+              p.card-text
+                | Users get wall checking stats each check they take. View top checks with /leaderboard. Only whitelisted users (set in discord) can check the walls in-game! Users can not check before the alert message, this is to prevent abuse of this system.
+    div(style='margin-top:2em;')
+    .row
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000')
+          .card
+            img.card-img-top.img-fluid(src='../img/tps.png' alt='Bot alerting tps being too low.')
+            .card-body
+              h5.card-title Custom TPS Alerts
+              p.card-text
+                | If you enable this module, you can set a custom TPS threshold which will notify everyone when the server goes below it. The bot checks and posts the TPS every 5 minutes.
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='300')
+          .card
+            img.card-img-top.img-fluid(src='../img/autofind.png' alt='Autofind running')
+            .card-body
+              h5.card-title Auto Find (Cosmic)
+              p.card-text
+                | If this module is enabled, every set interval the bot will /find the users on the list and post back to discord, if any players are on cannonplanet the bot will notify you.
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='600')
+          .card
+            img.card-img-top.img-fluid(src='../img/tracker.png' alt='Bot logging ingame chat to discord.')
+            .card-body
+              h5.card-title In-Game Chat + Player Tracking + Playtime Tracker
+              p.card-text
+                | The bot will log server chat to the #ingame-chat channel. You can also enable the player tracker which will alert you when any of the players on the tracker list join or leave the server. /Whitelisted players playtime is tracked down to the second. You can view a leaderboard for top playtime with /leaderboard playtime.
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='900')
+          .card
+            img.card-img-top.img-fluid(src='../img/outpost.png' alt='Outpost alert')
+            img.card-img-top.img-fluid(src='../img/outpost2.png' alt='Outpost alert ingame')
+            img.card-img-top.img-fluid(src='../img/raidevent.png' alt='Raid event alert in discord')
+            .card-body
+              h5.card-title Outpost + Raid Event Alerts + Stronghold Alerts 
+              p.card-text
+                | Discord and ingame spam when any outpost of the faction you set is under attack. You can also enable alerts when a raid event is about to occur (Servers with auto raid events). Cosmic has a stronghold bot which will spam when your stronghold is being taken.
+    div(style='margin-top:2em;')
+    .row
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000')
+          .card
+            img.card-img-top.img-fluid(src='../img/alts.png' alt='5 alt files')
+            .card-body
+              h5.card-title
+                | Up to 
+                strong 5
+                |  alts running.
+              p.card-text
+                | 4 extra optional alt logins are included. These alts can be controlled with /sendchat (see next card)
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='300')
+          .card
+            img.card-img-top.img-fluid(src='../img/sendchat.png' alt='Sendchat command')
+            img.card-img-top.img-fluid(src='../img/sendchat2.png' alt='Sendchat command /tpa')
+            img.card-img-top.img-fluid(src='../img/tpa.png' alt='Sendchat command working ingame')
+            .card-body
+              h5.card-title Send Any Command
+              p.card-text
+                | A powerful command is /sendchat. You can add alt0, alt1, etc. to the end of the command to control which alt runs the command. Only the top role default &apos;Admin&apos; can use this command. Permissions are also specified in the 
+                a(href='/documentation') Command Documentation
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='600')
+          .card
+            img.card-img-top.img-fluid(src='../img/alert2.png' alt='Bot alerts who enabled weewoo')
+            img.card-img-top.img-fluid(src='../img/alerts.png' alt='Bot spamming discord because of a raid')
+            .card-body
+              h5.card-title
+                | Raid Timer 
+              p.card-text
+                | Members can enable the &apos;weewoo&apos; command and spam the discord to get on in the case of being raided. This message spams in-game also with a custom message.
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='900')
+          .card
+            img.card-img-top.img-fluid(src='../img/economy.png' alt='Economy channel showing someone paid the bot')
+            .card-body
+              h5.card-title Economy Channel
+              p.card-text
+                | Get alerts when someone pays the bot and log it to the economy channel. Only whitelisted users payments show up in this channel. Use the /pay command (Default &apos;Bank&apos; role only) to send money to a player. Deposits are logged and put into a leaderboard. /leaderboard deposits.
+    div(style='margin-top:2em;')
+    .row
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000')
+          .card
+            img.card-img-top.img-fluid(src='../img/broadcast.png' alt='Picture of broadcast command')
+            img.card-img-top.img-fluid(src='../img/broadcast.gif' alt='Gif of broadcast command message')
+            .card-body
+              h5.card-title Broadcast Messages Far &amp; Wide
+              p.card-text
+                | The /broadcast command will send every user in the server with the role you mention the message.
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='300')
+          .card
+            img.card-img-top.img-fluid(src='../img/joinleave.png' alt='Welcome and leave message discord')
+            .card-body
+              h5.card-title Custom Join/Leave Messages
+              p.card-text Send a custom message when someone joins or leaves the server. Set the message with /set discordjoinmsg.
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='600')
+          .card
+            img.card-img-top.img-fluid(src='../img/purge.gif' alt='Bot bulk deleting messages')
+            .card-body
+              h5.card-title Purge
+              p.card-text Bulk delete discord messages with /purge
+      .col-md-3
+        div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='900')
+          .card
+            img.card-img-top.img-fluid(src='../img/mute.png' alt='Mute command')
+            img.card-img-top.img-fluid(src='../img/mute2.png' alt='Mute command audit log')
+            .card-body
+              h5.card-title Mute Users
+              p.card-text
+                | This command will set the users send messages permissions to false in every channel, they can only send messages if they have administrator permissions.
+    div(style='margin-top:0em;')
+      .row
+        .col-md-3
+          div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='0')
+            .card
+              img.card-img-top.img-fluid(src='../img/rotate.png' alt='Rotate command')
+              .card-body
+                h5.card-title Rotate Users
+                p.card-text
+                  | For competitive servers, a rotate feature is included. This kicks one user and invites another to the faction.
+        .col-md-3
+          div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='300')
+            .card
+              img.card-img-top.img-fluid(src='../img/panel.png' alt='UltimateBot GUI')
+              .card-body
+                h5.card-title Easy To Use GUI
+                p.card-text
+                  | Manage your bot and send commands within the GUI.
+        .col-md-3
+          div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='600')
+            .card
+              img.card-img-top.img-fluid(src='../img/shield.png' alt='Shield enabling and disabling')
+              .card-body
+                h5.card-title Automatic Shield
+                p.card-text
+                  | Set your shield times and the bot will disable wall/buffer alerts during them.
+        .col-md-3
+          div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='900')
+            .card
+              img.card-img-top.img-fluid(src='../img/editor.png' alt='Application question editor in GUI')
+              .card-body
+                h5.card-title App Question Editor
+                p.card-text
+                  | Add, remove, and update questions in the GUI editor with ease, simply click the "App Questions" button at the top of the console! No more broken JSON.
+    div(style='margin-top:0em;')
+      .row
+        .col-md-3
+          div(data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='0')
+            .card
+              img.card-img-top.img-fluid(src='../img/updater.png' alt='Auto updater')
+              .card-body
+                h5.card-title Automatic Updates
+                p.card-text
+                  | The bot will automatically download any updates on restart, and start back up for you with changes taking affect instantly.
+		
+  // Purchase Info
+  div(style='margin-top:6.5%;')
+  .container
+    .row
+      .col-md-12
+        div(data-aos='fade-up' data-aos-duration='800' data-aos-delay='100')
+          center
+            a.morehv(href='/documentation' style='font-size:3.5em; padding:0.3em; border:1px solid; border-radius: 15px;') All Features
+  // Purchase Info
+  div(style='margin-top:5em;')
+  .container
+    .row
+      .col-md-12
+        center 
+          
+          if user
+            if user.key != null
+              
+            else
+              center
+                br
+                br
+                h2.purchaseheader Purchase 
+                p(style='text-justify:center; font-size:20px;') You are logged in.
+                  br
+                  | You may access the purchase page now.
+              form(action='/dashboard' method='get')
+                div(data-aos='fade-up' data-aos-duration='1000' data-aos-delay='300')
+                  center
+                    button.btn.btn-primary.pbutton(type='submit' style='width:25%;') Purchase
+          else  
+            center
+              br
+              br
+              h2.purchaseheader Purchase 
+              h4 $#{price}
+              p(style='text-justify:center;') To purchase the bot, you must register an account and then login. Note: This bot works on most faction servers. Updates can be quickly added and pushed out for your server, or you can use a custom config. This bot was built around CosmicPvP, and other servers are packaged into the bot. This bot will run on Windows/Mac/Linux.
+            form(action='users/register' method='get')
+              div(data-aos='fade-up' data-aos-duration='1000' data-aos-delay='300')
+                center
+                  button.btn.btn-primary.pbutton(type='submit' style='width:25%;') Login/Register
+  // Footer
+  div(style='margin-top:5em;')
+  .container-fluid
+    .row
+      .col-md-12.footer
+        center
+          p
+            | Copyright &copy; UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated. 
+            strong
+              a(href='/tos') TOS
+            |  | 
+            strong
+              a(href='/support') Support
+  script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')

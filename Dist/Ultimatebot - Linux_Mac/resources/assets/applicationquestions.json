@@ -1,0 +1,71 @@
+{
+    "applicationStarted": {
+        "embedTitle": "Application Started for FACTION",
+        "thumbnailURL": "",
+        "description": "Thank you for applying for FACTION, make sure to fill out all questions to the best of your ability. Once you complete all questions your application will be submitted. You will receive a DM saying you have been accepted or denied later. Type \"cancel\" at any time to cancel this application.",
+        "embedHexColor": "#5E34B0",
+        "timestampSet": true
+    },
+    "applicationFinished": {
+        "embedTitle": "Application Completed",
+        "thumbnailURL": "",
+        "description": "Thank you for applying for FACTION. Your application has been submitted. You should receive a response within the next few hours.",
+        "embedHexColor": "#25c448",
+        "timestampSet": true
+    },
+    "applicationSent": {
+        "color": "#2965f2"
+    },
+    "applicationAccepted": {
+        "embedTitle": "Application Accepted!",
+        "thumbnailURL": "",
+        "description": "You have been accepted to FACTION, welcome! Please contact a leader if you think that this is a mistake.",
+        "embedHexColor": "#25c448",
+        "timestampSet": true
+    },
+    "applicationDenied": {
+        "embedTitle": "Application Denied",
+        "thumbnailURL": "",
+        "description": "Your application to FACTION was denied. You may apply again later. Please contact a leader if you think that this is a mistake.",
+        "embedHexColor": "#e82610",
+        "timestampSet": true
+    },
+    "questions": [
+        {
+            "number": 1,
+            "question": "1. How old are you?",
+            "color": "#ffa617",
+            "timestampSet": false
+        },
+        {
+            "number": 2,
+            "question": "2. Can you talk in discord calls?",
+            "color": "#25c448",
+            "timestampSet": false
+        },
+        {
+            "number": 3,
+            "question": "3. Rate your skills for raiding and pvp on a 1-10 scale.",
+            "color": "#ed13e6",
+            "timestampSet": false
+        },
+        {
+            "number": 4,
+            "question": "4. What can you provide for the faction that others can't?",
+            "color": "#13b3ed",
+            "timestampSet": false
+        },
+        {
+            "number": 5,
+            "question": "5. What is your timezone, and how many hours can you play a day?",
+            "color": "#e8f229",
+            "timestampSet": false
+        },
+        {
+            "number": 6,
+            "question": "6. List the past factions you have been in.",
+            "color": "#f22930",
+            "timestampSet": false
+        }
+    ]
+}

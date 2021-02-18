@@ -1,0 +1,16 @@
+{
+  "name": "ultimatebot-compiler",
+  "version": "1.0.0",
+  "description": "Compiles updates for ultimatebot with 2 clicks.  ",
+  "main": "run.js",
+  "scripts": {
+    "obfuscate": "node run.js",
+	"deobfuscate": "node decomp.js",
+	"update": "node update.js"
+  },
+  "author": "UltimateGamer079",
+  "license": "GNU",
+  "devDependencies": {
+    "javascript-obfuscator": "^0.28.1"
+  }
+}

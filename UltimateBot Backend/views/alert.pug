@@ -1,0 +1,28 @@
+doctype html
+head
+  meta(name='keywords' content='ultimatebot, factions bot, minecraft bot, factions bot, wall checking')
+  meta(name='description' content='Factions wall checking bot with many features meant for CosmicPVP. Convert ingame commands into discord.')
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+  link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+  link(rel='icon' href='/img/favicon.ico' type='image/x-icon')  
+  style
+    include ./style.css
+  script(src='https://kit.fontawesome.com/3678a0ca48.js' crossorigin='anonymous')
+  link(href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap' rel='stylesheet')
+body
+if 2 >= 2
+  script.
+    function closealert() {
+    document.getElementById('alertbanner').style.display = 'none';
+    }
+  block alert 
+    div(class="alertbanner" id="alertbanner")
+      i(class="fas fa-times fa-3x" style="position:absolute; top:0; right:0; margin-top:10px; margin-right:10px; cursor:pointer;" onclick="closealert()")
+      div(class="alerticon")
+        i(class="fas fa-exclamation-triangle fa-5x warn")
+      div(class="alerttextheader")
+        h1 Info:
+      div(class="alerttext")   
+        p The purchase page has been disabled, UltimateBot will be shutting down Saturday, August 15th. If you didnt get the bot in time, your luck is out.
+block content

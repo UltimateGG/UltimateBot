@@ -1,0 +1,16 @@
+.card {
+  border-radius: 10px;
+  padding:2.5% 2.5% 0% 2.5%;
+  height:100%;
+  width: 90%;
+  background-color: #fafafa !important;
+}
+
+.card hr {
+  color: #eeeeee;
+  background-color: #eeeeee;
+}
+
+.leftalign {
+  text-align: left;
+}

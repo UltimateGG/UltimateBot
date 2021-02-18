@@ -1,0 +1,183 @@
+extends ./alert.pug
+block content
+  doctype html
+  head
+    meta(name='keywords' content='ultimatebot, factions, minecraft bot, factions bot, wall checking, minecraft to discord, ultimate bot')
+    meta(name='description' content='Factions wall checking bot with many features. Convert ingame commands into discord.')
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+    link(href='https://unpkg.com/aos@2.3.1/dist/aos.css' rel='stylesheet')
+    script(src='https://unpkg.com/aos@2.3.1/dist/aos.js')
+    script(src='https://kit.fontawesome.com/3678a0ca48.js' crossorigin='anonymous')
+    script(src='https://www.google.com/recaptcha/api.js')
+    link(href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap' rel='stylesheet')
+    link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+    link(rel='icon' href='/img/favicon.ico' type='image/x-icon')    
+    title UltimateBot - Dashboard
+    script 
+        include ./config.js 
+    script
+      include ./clipboard.min.js
+    style 
+        include ./style.css
+  script.
+    $(document).ready(function() {
+    AOS.init();
+    });
+    new ClipboardJS('#copyconfig');
+  #top
+  // Navbar
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark(style='background-color:#191919 !important;')
+    a.navbar-brand(href='/') <img src="/img/favicon.png" width='25' height='25'> UltimateBot
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right.ml-auto
+        li.nav-item
+          a.nav-link(href='/' style='margin-right:0.5em;') Home 
+        if user
+          li.nav-item
+            a.nav-link(href='/dashboard' style="background-color:#303030 !important;") Dashboard
+          li.nav-item
+            a.nav-link.btn-danger(href='/users/logout') Logout
+  div(style='margin-bottom:2em;')
+  .container.mt-4
+  .row
+    .col-md-6.offset-3
+      h1.text-center.mb-4 Custom Config Setup
+      hr
+      div#start(hidden)
+        p Your config has been created! Click the button below to copy it to your clipboard. Then in the assets folder, open customConfig.json in notepad++. Paste this config and 
+            b save it! 
+            | Then, in .env set serverConfiguration to 'custom', save and restart your bot.
+        hr
+        button.btn.btn-success.btn-block.mb-3#copyconfig(data-clipboard-target="#newConfig") Copy Config
+        button.btn.btn-danger.btn-block.mb-4#newcfg Create Another Config
+        hr
+        label#newConfig Test
+      form#configForm
+        p Info: Use ".*" with no quotes for ranks. This basically accepts any characters for any length so if you have different ranks it will still work.
+        .mb-4
+          h4 Message Format:
+          small
+            | Placeholders:
+            br
+            |                                 %username%
+            br
+            |                                 %msg% - The text of the message
+          input#msg.form-control(type='text' maxlength='100' required)
+          small
+            | Ex: [lavaplanet] [Ultimate -&gt; me] hi = 
+            b [lavaplanet] [%username% -&gt; me] %msg%
+        .mb-4
+          h4 Paid Format:
+          small
+            | Placeholders:
+            br
+            |                                 %username%
+            br
+            |                                 %money% - The amount received
+          input#paid.form-control(type='text' maxlength='100' required)
+          small
+            | Ex: $1 has been received from Ultimate. = 
+            b $%money% has been received from %username%.
+        .mb-4
+          h4 Sent Format:
+          small
+            | Placeholders:
+            br
+            |                                 %username%
+            br
+            |                                 %money% - The amount sent
+          input#sent.form-control(type='text' maxlength='100' required)
+          small
+            | Ex: $1 has been sent to Ultimate. = 
+            b $%money% has been sent to %username%.
+        .mb-4
+          h4 FTop Command
+          input#cmdftop.form-control(type='text' maxlength='100' placeholder='Enter Command..' required)
+          small Ex: /f top
+        .mb-4
+          h4 FList Command
+          small
+          | Placeholders:
+          br
+          |                                 %page% - The page of f list
+          input#cmdflist.form-control(type='text' maxlength='100' placeholder='Enter Command..' required)
+          small Ex: /f list
+        .mb-4
+          h4 Pay Command
+          small
+            | Placeholders:
+            br
+            |                                 %username%
+            br
+            |                                 %amount% - The amount to pay
+          input#cmdpay.form-control(type='text' maxlength='100' placeholder='Enter Command..' required)
+          small Ex: /pay %username% %amount%
+        .mb-4
+          h4 Pay Confirmation
+          .custom-control.custom-switch
+            input#payconf.custom-control-input(type='checkbox')
+            label.custom-control-label(for='payconf') /pay 2x
+          small Does the server make you type /pay twice to send?
+        .mb-4
+          h4 FWho Command
+          small
+            | Placeholders:
+            br
+            |                                 %faction% - The faction to show info on
+          input#cmdfwho.form-control(type='text' maxlength='100' placeholder='Enter Command..' required)
+          small Ex: /f who %faction%
+        .mb-4
+          h4 FTop Format:
+          small
+            | Placeholders:
+            br
+            |                                 %place% - The number place. Ex: #3. 
+            br
+            |                                 %faction% - The faction for that ftop place
+            br
+            |                                 %value% The factions points or wealth value
+          input#ftopformat.form-control(type='text' maxlength='100' required)
+          small
+            | Ex: #1. Test - $234,463.84 = 
+            b #%place%. %faction% - %value%
+        .mb-4
+          h4 FTop Start Line:
+          input#ftopstart.form-control(type='text' maxlength='100' required)
+          small
+            | The start of the ftop board. Ex: -----.[ (This is what it INCLUDES!, not all of it!)
+        .mb-4
+          h4 FList Start Line:
+          input#fliststart.form-control(type='text' maxlength='100' required)
+          small
+            | The start of the flist board. Ex: -----.[ (This is what it INCLUDES!, not all of it!)
+        .mb-4
+          h4 FWho Lines:
+          input#fwholines.form-control(type='text' maxlength='500' required)
+          small
+            | What lines to include in /f who, split by a comma. Ex: 
+            b description:, online:, offline:, land|, allies:
+        button#submitBtn.btn.btn-primary.btn-block(type='submit') Create Config
+      .mb-4
+
+  // Footer
+  div(style='margin-top:50%;')
+  .container-fluid
+    .row
+      .col-md-12.footer
+        center
+          p
+            | Copyright &copy; UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated. |
+            strong
+              a(href='/tos')  TOS
+            |  |
+            strong
+              a(href='/support')  Support
+  script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')

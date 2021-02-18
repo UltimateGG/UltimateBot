@@ -1,0 +1,299 @@
+extends ./alert.pug
+block content
+  doctype html
+  head
+    meta(name='keywords' content='ultimatebot, factions, minecraft bot, factions bot, wall checking, minecraft to discord, ultimate bot')
+    meta(name='description' content='Factions wall checking bot with many features. Convert ingame commands into discord.')
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+    link(href='https://unpkg.com/aos@2.3.1/dist/aos.css' rel='stylesheet')
+    script(src='https://unpkg.com/aos@2.3.1/dist/aos.js')
+    style
+      include ./style.css
+    style
+      include ./dash.css
+    script
+      include ./dash.js
+    script
+      include ./clipboard.min.js
+    script(src='https://kit.fontawesome.com/3678a0ca48.js' crossorigin='anonymous')
+    script(src='https://www.google.com/recaptcha/api.js')
+    link(href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap' rel='stylesheet')
+    link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+    link(rel='icon' href='/img/favicon.ico' type='image/x-icon')    
+    title UltimateBot - Dashboard
+    link(rel='stylesheet' href='style.css')
+  script.
+    $(document).ready(function() {
+    AOS.init();
+    });
+    new ClipboardJS('#copykey');
+  #top
+  // Navbar
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark(style='background-color:#191919 !important;')
+    a.navbar-brand(href='/') <img src="/img/favicon.png" width='25' height='25'> UltimateBot
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right.ml-auto
+        li.nav-item
+          a.nav-link(href='/' style='margin-right:0.5em;') Home 
+        if user
+          li.nav-item
+            a.nav-link(href='/dashboard' style="background-color:#303030 !important;") Dashboard
+          li.nav-item
+            a.nav-link.btn-danger(href='/users/logout') Logout
+  div(style='margin-bottom:2em;')
+  if user && user.email == "(ADMINEMAIL)@gmail.com"
+    .container-fluid
+      .row
+        .col-md-3
+          != messages('message', locals)
+          if errors
+            each error, i in errors
+              div(class="alert alert-danger") #{error.msg}   
+          h1 Welcome, Admin!     
+          form(method='POST', action='/admin/s')
+            #form-group
+              label Find user by:
+              br
+              select(class='custom-select form-control' style='width:60%;' name='findtype')
+                option(selected='') Select...
+                option(value='1') Email/Username
+                option(value='2') ID
+                option(value='3') Key
+                option(value='5') PayPal
+                option(value='4') Prune DB
+            br    
+            #form-group
+              label User:
+              input.form-control(name='userinput', type='text' style='width:60%;')
+              br
+            #form-group
+              label Action:
+              br
+              select(class='custom-select form-control' style='width:60%;' name='action')
+                option(selected='') Select...
+                option(value='1') Replace/Set HWID
+                option(value='2') Replace/Set Key
+                option(value='4') Set Password
+                option(value='3') Delete
+                option(value='4') Prune DB
+                option(value='5') Set HWID Resets
+                option(value='6') Get DB Entry
+                option(value='7') Set Discord
+              br 
+              br
+              #form-group
+                label Input 
+                small  (If deleting a user just type anything):
+                input.form-control(name='setinput', type='text' style='width:60%;')
+                br   
+              #form-group
+                label Admin Password:
+                input.form-control(name='password', type='password' style='width:60%;')
+                br
+              #form-group
+                div(class="g-recaptcha" data-sitekey="6LcgQMgUAAAAAO0Bn2aFglAo5ADtBRCl1WK1xXcp")    
+              br    
+            div(data-aos="fade-up" data-aos-duration="800" data-aos-delay="500")     
+              input.btn.btn-primary(type='submit', value='Submit' style='width:60%;') 
+            div(style='margin-bottom: 3em;')
+  // Dashboard
+  if user && user.key != null
+    script.
+      var theirkey = "#{user.key}";
+      function getkey() {
+      var label = document.getElementById('keylbl');
+      var button = document.getElementById('showkeyb');
+      if (button.innerHTML == 'Hide Key') {
+      label.innerHTML = '';
+      document.getElementById('keydiv').hidden = true;
+      button.innerHTML = 'Reveal License Key';
+      } else {
+      label.innerHTML = theirkey;
+      document.getElementById('keydiv').hidden = false;
+      button.innerHTML = 'Hide Key';
+      }
+      }
+      
+      function copykey() {
+      document.getElementById('copykey').innerHTML = "Copied!";
+      setTimeout(function() {
+      document.getElementById('copykey').innerHTML = "Copy";
+      }, 1200);
+      }
+    .modal#confirmReset(tabindex='-1' role='dialog' style='margin-top:10em;' class='fade')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5.modal-title HWID Reset
+            button.close(type='button' data-dismiss='modal' aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            p Are you sure you want to reset your HWID? 
+            p You have 
+              b #{user.hwidResets}/3 
+              | resets for this month.
+          .modal-footer
+            button.btn.btn-primary(type='button' data-dismiss='modal') Close
+            form(method='POST', action='/users/resethwid')
+              small(id='uskeyd' hidden) #{user.key}
+              input.form-control(name='uskey' type='password' id='hw4r' hidden)
+              button.btn.btn-danger(type='submit' id='confirmResetBtn') Reset HWID
+
+    .container-fluid
+      != messages('message', locals)
+      if errors
+        each error, i in errors
+          div(class="alert alert-danger") #{error.msg}
+      center
+        .row
+          .col-md-6(style='margin-bottom:4%;' data-aos='fade-up' data-aos-duration='700' data-aos-delay='0')
+            .card
+              h1.card-title License
+              hr
+              h3 Welcome, 
+                span(style='color:#616161;') #{user.email}
+                |. 
+              h4 You have a license
+              center
+                button#showkeyb.btn.btn-primary(type='button' name='showkeybutton' style='width:65%;' onclick='getkey()') Reveal License Key
+              div(style='margin-top:2%;')
+              strong
+                div(id='keydiv' style='margin-bottom:1.5%;' hidden)
+                  label#keylbl
+                  button#copykey.btn.btn-success(type='button' name='showkeybutton' onclick='copykey()' style='margin-left:1%;' data-clipboard-target="#keylbl") Copy
+              hr
+              p.leftalign
+                | Once you open the file, input this key and you should have access, if not contact me on
+                a(href='/support' style='color:#0062c4;')  Discord
+                | . Note: The key can only be used once per computer (HWID) - If your key suddenly stops working check your HWID below.
+                | Make sure you read the documentation before you ask for help on discord, the documentation has info on all commands and permissions. Also read the "README" file in the download. Download the application on the right.
+                hr 
+                br
+                h5.mb-4 Don't see your server's pre-made config? 
+                  button.btn.btn-primary.ml-3(onclick="window.location.href='users/config'") Create Custom Config
+                hr 
+                h5 Confused?
+                button.btn.btn-secondary.mb-4(style='margin-right:1%;' onclick="window.location.href='/documentation'") Command Help
+                button.btn.btn-outline-secondary(onclick="window.location.href='/support'") Support
+                small HWID Reset Below.
+          .col-md-6(style='margin-bottom:4%;' data-aos='fade-up' data-aos-duration='700' data-aos-delay='400')
+            .card
+              h1.card-title Download
+              h4 Version: 
+                b #{version}
+              h5 Your Discord ID: 
+                b #{user.discord}
+              hr
+              center
+                p This bot is for 
+                  b Windows 8+/Mac/Linux 
+                  | only. You may download this application whenever you need unless your license is suspended. Info: Your browser may say this application is not downloaded in this format commonly, click keep or allow. A setup video is below, but only use it if you need as detailed instructions are in the readme.txt file.
+                  br
+                  hr
+                  //iframe(width='560' height='315' src='https://www.youtube.com/embed/nVoLW0_o7oA' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+                a.btn.btn-primary.btn-block(href='/download/'+user.key+'/c' target='_blank' style='margin-top:0.5%; background-color:#E91E63; border:none; padding:0.5em; font-size:25px; width:45%; float:left;') Download - Windows
+                a.btn.btn-primary.btn-block(href='/download/'+user.key+'/l' target='_blank' style='margin-top:0.5%; background-color:#E91E63; border:none; padding:0.5em; font-size:25px; width:45%; float:right;') Download - Mac & Linux
+      center
+        .row 
+          .col-md-6(data-aos='fade-up' data-aos-duration='700' data-aos-delay='900')
+            .card
+              h1.card-title HWID
+              hr
+              p.leftalign Your HWID is your computer's unique ID. The application will only launch once per HWID. You may reset it here up to 3 times a month. At the first of every month, you will be granted 3 more resets. View your current HWID that our database has below, when your bot launches it will say "UID:" and that is your HWID. After you click reset, simply launch the bot on your new pc and it will lock to that HWID.
+              hr
+              br
+              p Your current monthly HWID resets:  
+                span(style='color:#fc9803; font-weight:600; margin-left:5px;' id='hwidResetsCount')  #{user.hwidResets}/3
+              p Current HWID:
+              input.form-control(id='currenthwid', type='text' disabled style='width:100%')
+              p(id='hwidh' hidden) #{user.hwid}
+              br
+              center  
+                button#resethwid.btn.btn-primary(type='button' style='width:25%; float:right;' disabled) Reset
+                p (Disabled as UB has shut down)
+              br
+              br
+              p(id='outOfResetsText' style='color:#bf0808;' hidden) You are out of HWID resets. At the first of each month you will get 3 more resets. If you absolutely need to move computers, please contact me on discord.
+  else if user && user.email != "(ADMINEMAIL)@gmail.com"     
+    .container-fluid
+      != messages('message', locals)
+      if errors
+        each error, i in errors
+          div(class="alert alert-danger") #{error.msg}
+      .row
+        .col-md-6(data-aos='fade-up' data-aos-duration='800' data-aos-delay='0')
+          center
+            .card
+              h1.card-title Info
+              hr
+              h3 Welcome, 
+                span(style='color:#616161;') #{user.email}
+                |. 
+              h4 You do 
+                b not 
+                | have a license
+              hr
+              br
+              center
+              p
+                | Purchase a license to get a license key. Further instructions are also available after purchase. Note: This bot works on most faction servers. I can quickly add and push out updates for your server, just open a support ticket on discord. This bot was built around CosmicPvP, and other servers are packaged into the bot. 
+                | This bot will only run on 
+                b Windows 8+/Mac/Linux
+                | operating systems.
+            br
+            br
+        .col-md-6
+          center
+            .card(data-aos='fade-up' data-aos-duration='800' data-aos-delay='500')
+              h1.card-title(style='text-decoration:line-through;') Purchase (Disabled)
+              hr
+              p
+                | The bot is $#{price} USD. Payments are only accepted through PayPal.
+              p Check the box to agree that you accept our
+                a(href='/tos')  Terms of Service
+                | .
+              p
+                script(type='text/javascript').
+                  function showbtn() {
+                  var checkBox = document.getElementById("tosCheck");
+                  var btn = document.getElementById("purchasebtn");
+                  if (checkBox.checked == true){
+                  btn.style.display = "block";
+                  } else {
+                  btn.style.display = "none";
+                  }
+                  }
+                #tmpfmcheck.form-check
+                  input#tosCheck.form-check-input(type='checkbox' value='' style='width:3em; height:3em;' onclick='showbtn()')
+                  label.form-check-label(for='tosCheck' style='margin-left:3em; margin-top:1em;')
+                    | I agree to the Terms of Service.
+                  br
+                  br
+                  p 
+                  br
+                #purchasebtn(style='display:none;')
+                  p Info: The purchase page has been disabled, as UltimateBot is shutting down August 15th.
+                //  form(action="/pay/usid="+user.id method="post")
+                //    input(type="submit" value="Purchase for $"+locals.price+" USD" class="btn btn-primary btn-block" style="width:100%; padding:0.5em;")               
+  // Footer
+  div(style='margin-top:50%;')
+  .container-fluid
+    .row
+      .col-md-12.footer
+        center
+          p
+            | Copyright &copy; UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated. |
+            strong
+              a(href='/tos')  TOS
+            |  |
+            strong
+              a(href='/support')  Support
+  script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')

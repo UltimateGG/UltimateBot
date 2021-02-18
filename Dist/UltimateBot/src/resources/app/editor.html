@@ -1,0 +1,255 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>UltimateBot - Application Questions Editor</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  	<link rel='icon' href='./panel/favicon.png' type='image/x-icon'/>
+    <script src="./panel/editor.js"></script>
+  	<link rel='stylesheet' href='./panel/style.css'/>
+	<style>
+		.colorPicker {
+			border:none;
+			outline:0;
+		}
+		.colorPicker:active {
+			border:none;
+			outline:0;
+		}
+		.colorPicker:focus {
+			border:none;
+			outline:0;
+		}
+		.QcolorPicker {
+			border:none;
+			outline:0;
+			height:2.39em;
+		}
+		.QcolorPicker:focus {
+			border:none;
+			outline:0;
+		}
+	</style>
+  </head>
+  <body>
+	<div style="margin-top:1em;"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 style="float:left;">Application Questions Editor</h1>
+				<br>
+				<br>
+				<br>
+				<p>You may click the color next to Hex Color text to quickly change color!</p>
+			</div>
+		</div>
+	</div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+			<h2 style="float:left;">Application Started:</h2>
+			<br>
+			<br>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Embed Title:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The embeds title" id="appstartedtitle">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Thumbnail URL:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The exact URL with a .png or .jpg extension" id="appstartedthumb">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Description:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The description of the embed" id="appstarteddesc">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><input type="color" class="colorPicker" id='appstartedcp'> Hex Color:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The color of the embed" id="appstartedcolor">
+			</div>
+			<p>Timestamp enabled (Adds the current time on the embed):</p>
+			<select class="custom-select" style="width:95%;" id="appstartedtimestamp">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+      </div>
+	  <div style="margin-bottom:2em;"></div>
+	  
+      <div class="row">
+        <div class="col-md-12">
+			<h2 style="float:left;">Application Finished:</h2>
+			<br>
+			<br>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Embed Title:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The embeds title" id="appfinishedtitle">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Thumbnail URL:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The exact URL with a .png or .jpg extension" id="appfinishedthumb">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Description:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The description of the embed" id="appfinisheddesc">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><input type="color" class="colorPicker" id='appfinishedcp'> Hex Color:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The color of the embed" id="appfinishedcolor">
+			</div>
+			<p>Timestamp enabled (Adds the current time on the embed):</p>
+			<select class="custom-select" style="width:95%;" id="appfinishedtimestamp">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+      </div>
+	  <div style="margin-bottom:2em;"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+			<h2 style="float:left;">Application Submitted:</h2>
+			<br>
+			<br>
+			<p style="float:left;">Embed when it is submitted in the applications channel.</p>
+			<br>
+			<br>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><input type="color" class="colorPicker" id='appsubmitcp'> Hex Color:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The color of the embed" id="appsubmitcolor">
+			</div>
+        </div>
+      </div>
+	  <div style="margin-bottom:2em;"></div>
+	  
+      <div class="row">
+        <div class="col-md-12">
+			<h2 style="float:left;">Application Accepted:</h2>
+			<br>
+			<br>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Embed Title:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The embeds title" id="appaccepttitle">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Thumbnail URL:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The exact URL with a .png or .jpg extension" id="appacceptthumb">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Description:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The description of the embed" id="appacceptdesc">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><input type="color" class="colorPicker" id='appacceptcp'> Hex Color:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The color of the embed" id="appacceptcolor">
+			</div>
+			<p>Timestamp enabled (Adds the current time on the embed):</p>
+			<select class="custom-select" style="width:95%;" id="appaccepttimestamp">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+      </div>
+	  <div style="margin-bottom:2em;"></div>
+	  
+      <div class="row">
+        <div class="col-md-12">
+			<h2 style="float:left;">Application Denied:</h2>
+			<br>
+			<br>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Embed Title:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The embeds title" id="appdeniedtitle">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Thumbnail URL:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The exact URL with a .png or .jpg extension" id="appdeniedthumb">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Description:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The description of the embed" id="appdenieddesc">
+			</div>
+			<div class="input-group mb-3" style="width:95%;">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><input type="color" class="colorPicker" id='appdeniedcp'> Hex Color:</span>
+				</div>
+				<input type="text" class="form-control" aria-label="The color of the embed" id="appdeniedcolor">
+			</div>
+			<p>Timestamp enabled (Adds the current time on the embed):</p>
+			<select class="custom-select" style="width:95%;" id="appdeniedtimestamp">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+      </div>
+	  <div style="margin-bottom:2em;"></div>
+	  
+		
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+			<center>
+				<h1>Questions:</h1>
+			</center>
+			</div>
+		</div>
+	</div>
+	<div style="margin-bottom:2em;"></div>
+		
+	  
+	  <!-- QUESTIONS: -->
+	  <div id='questionsContainer'>
+		
+	  </div>
+    </div>
+	<div style="margin-bottom:2em;"></div>
+
+    <button type="button" class="btn btn-primary" style="margin-right:1em; float:right;" id="save">Save Questions</button>
+	<div style="float:left; padding-left:1em;">
+		<button type="button" class="btn btn-danger" style="margin-right:1em; float:right;" id="removeq">Remove Question</button>
+		<button type="button" class="btn btn-success" style="margin-right:1em; float:right;" id="addq">Add Question</button>
+	</div>
+
+    <div style="margin-top:5em;"></div>
+	
+    <div class="container-fluid" id="footerR"><div class="row"><div class="col-md-12 footer"><center><p>Copyright © UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated. <strong><a href="https://ultimatebot.pw/tos" target="_blank">TOS</a></strong> | <strong><a href="https://ultimatebot.pw/support" target="_blank">Support</a></strong></p></center></div></div></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

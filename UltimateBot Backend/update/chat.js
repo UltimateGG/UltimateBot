@@ -1,0 +1,157 @@
+const PROTO_VER_1_10 = require('minecraft-data')('1.10.2').version.version
+var moment = require('moment-timezone');
+const dotenv = require('dotenv');
+dotenv.config({ path: '../../../../.env' });
+
+module.exports = inject
+
+function inject (bot, options) {
+  const CHAT_LENGTH_LIMIT = options.chatLengthLimit || ((bot.protocolVersion > PROTO_VER_1_10) ? 256 : 100)
+  const USERNAME_REGEX = '(?:\\(.+\\)|\\[.+\\]|.)*?(\\w+)'
+
+  const ChatMessage = require('../chat_message')(bot.version)
+  // add an array, containing objects such as {pattern:/regex pattern/, chatType:"string", description:"string"}
+  // chat.pattern.type will emit an event for bot.on() of the same type, eg chatType = whisper will trigger bot.on('whisper')
+  bot.chatPatterns = [
+    /*{
+      pattern: new RegExp(`^${USERNAME_REGEX} whispers(?: to you)?:? (.*)$`),
+      type: 'whisper',
+      description: 'Vanilla whisper'
+    },
+    {
+      pattern: new RegExp(`^\\[${USERNAME_REGEX} -> \\w+\\s?\\] (.*)$`),
+      type: 'whisper',
+      description: 'Essentials whisper'
+    },
+    {
+      pattern: new RegExp(`^${USERNAME_REGEX}\\s?[>:\\-»\\]\\)~]+\\s(.*)$`),
+      type: 'chat',
+      description: 'Universal chat'
+    }*/
+  ]
+
+  bot.chatAddPattern = (patternValue, typeValue, descriptionValue) => {
+    // description is not required but recommended
+    if (typeof descriptionValue === 'undefined') {
+      descriptionValue = 'None'
+    }
+    bot.chatPatterns.push({
+      pattern: patternValue,
+      type: typeValue,
+      description: descriptionValue
+    })
+  }
+
+  bot._client.on('chat', (packet) => {
+    function checkForChatPatterns (msg) {
+      const stringMsg = msg.toString()
+      let matchAny = false
+      // iterate through each object in chat.patterns array and test if .pattern matches
+      for (const { pattern, type } of bot.chatPatterns) {
+        // Chat pattern matches server messages so drop them
+        if (stringMsg.startsWith('[Server:')) break
+
+        const match = stringMsg.match(pattern)
+        if (match) {
+          matchAny = true
+          bot.emit(type, ...match.slice(1), msg.translate, msg)
+        }
+      }
+
+      if (matchAny === false) {
+        bot.emit('unmachedMessage', stringMsg, msg)
+      }
+    }
+
+    var msg;
+    try {
+      msg = new ChatMessage(JSON.parse(packet.message));
+    } catch (e) {
+      msg = new ChatMessage(packet.message);
+    }
+    bot.emit('message', msg);
+
+    //Commented out because it would cause crashes on some servers (ddos basically)
+    //checkForChatPatterns(msg);
+
+    // Position 2 is the action bar
+    //if (packet.position === 2) bot.emit('actionBar', msg);
+  })
+
+  function chatWithHeader (header, message) {
+    const lengthLimit = CHAT_LENGTH_LIMIT - header.length
+    message.split('\n').forEach((subMessage) => {
+      if (!subMessage) return
+      let i
+      let smallMsg
+      for (i = 0; i < subMessage.length; i += lengthLimit) {
+        smallMsg = header + subMessage.substring(i, i + lengthLimit)
+        bot._client.write('chat', { message: smallMsg })
+      }
+    })
+  }
+
+  function tabComplete (text, cb, assumeCommand = false, sendBlockInSight = true) {
+    let position
+
+    if (sendBlockInSight) {
+      const block = bot.blockInSight()
+
+      if (block) {
+        position = block.position
+      }
+    }
+
+    bot._client.once('tab_complete', (packet) => {
+      cb(undefined, packet.matches)
+    })
+
+    bot._client.write('tab_complete', {
+      text,
+      assumeCommand,
+      lookedAtBlock: position
+    })
+  }
+
+ function getTime() {
+  //get time function
+  var timezone = require('../../../../../../assets/settings.json').timezone;
+  var time = moment(Date.now())
+    .tz(timezone)
+    .format('LT');
+  var timezoneAbbr = moment.tz.zone(timezone).abbr(360);
+  return time + ' ' + timezoneAbbr;
+};
+
+  bot.whisper = (username, message) => {
+    chatWithHeader(`/tell ${username} `, message)
+  }
+
+  bot.chat = (message) => {
+  chatWithHeader('', message);
+	var chatvary;
+	var busername = bot.username;
+	if (!message.match(/^\/.*/)) {
+		chatvary = '\x1b[35m'+getTime()+' \x1b[31m[CHT] \x1b[0m';
+	} else {
+		chatvary = '\x1b[35m'+getTime()+' \x1b[33m[CMD] \x1b[32m';
+	}
+
+	if (message.includes('/server') || message.includes('/f global off') || message.includes('/f c a') || message.includes('/f c f') || message.includes('/ping') || message.includes('/antiafk') || message.includes('/tps')) {busername = 'All'; if (message.includes('/ping')) {chatvary = '\x1b[35m'+getTime()+'\x1b[33m [CMD] \x1b[36m';}}
+	if (busername == 'All' && bot.username == process.env.MUSERNAME) {
+		if (message == '/warp outpost' || message.trim().toLowerCase() == '/outpost' || message.trim().toLowerCase() == '/raid' || message.trim() == '/sh') { } else if (!message.includes(process.env.mcalertmessage) || !message.includes('have not been checked') || !message.includes('have been checked by')) {
+			if (message.includes('have not been checked') || message.includes('have been checked') || message.includes('outpost is under attack,')) { } else {
+        console.log(chatvary+busername+': '+message);
+			}
+		}
+	} else if (busername != 'All') {
+		if (message == '/warp outpost' || message.trim().toLowerCase() == '/outpost' || message.trim().toLowerCase() == '/raid' || message.trim() == '/sh') { } else if (!message.includes(process.env.mcalertmessage) || !message.includes('have not been checked') || !message.includes('have been checked by')) {
+			if (message.includes('have not been checked') || message.includes('have been checked') || message.includes('outpost is under attack,')) { } else {
+        console.log(chatvary+busername+': '+message);
+			}
+		}
+	}
+  }
+
+  bot.tabComplete = tabComplete
+}

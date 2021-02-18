@@ -1,0 +1,186 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>UltimateBot - Settings</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel='icon' href='./panel/favicon.png' type='image/x-icon'/>
+    <script src="./panel/Sjs.js"></script>
+    <link rel='stylesheet' href='./panel/style.css'/>
+</head>
+<body>
+<div style="margin-top:1em;"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="float:left;">Quick Settings</h1>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top:1.2em;"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Auto Find</h4>
+            <select class="custom-select" id="autofind" style="width:95%;">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Join Command</h4>
+            <div class="input-group mb-3" style="width:95%;">
+                <input type="text" class="form-control" aria-label="planet" id="planet">
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Discord Prefix</h4>
+            <div class="input-group mb-3" style="width:95%;">
+                <input type="text" class="form-control" aria-label="prefix" id="prefix">
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Discord Game</h4>
+            <div class="input-group mb-3" style="width:95%;">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Playing:</span>
+                </div>
+                <input type="text" class="form-control" aria-label="game" id="game">
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Raid Event Alerts</h4>
+            <select class="custom-select" style="width:95%;" id="raidevent">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>TPS Alerts</h4>
+            <select class="custom-select" style="width:95%;" id="tpsalert">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Outpost Faction</h4>
+            <div class="input-group mb-3" style="width:95%;">
+                <input type="text" class="form-control" aria-label="your faction" id="faction">
+            </div>
+        </div>
+    </div>
+	<div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Stronghold Faction</h4>
+            <div class="input-group mb-3" style="width:95%;">
+                <input type="text" class="form-control" aria-label="your faction" id="strongholdfaction">
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Outpost Alerts</h4>
+            <select class="custom-select" style="width:95%;" id="outpostalert">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+	<div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Stronghold Alerts</h4>
+            <select class="custom-select" style="width:95%;" id="strongholdalert">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Wall Checking</h4>
+            <select class="custom-select" style="width:95%;" id="wallchecking">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+	<div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Buffer Checking</h4>
+            <select class="custom-select" style="width:95%;" id="bufferchecking">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+    <div style="margin-top:1em;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Player Login/out Alerts</h4>
+            <select class="custom-select" style="width:95%;" id="playeralerts">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+	<div style="margin-top:1em;"></div>
+	<div class="row">
+        <div class="col-md-12">
+            <h4>Applications Enabled</h4>
+            <select class="custom-select" style="width:95%;" id="applications">
+                <option value="1">Enabled</option>
+                <option value="2">Disabled</option>
+            </select>
+        </div>
+    </div>
+	<div style="margin-top:1em;"></div>
+	<div class="row">
+        <div class="col-md-12">
+            <h4>Console Theme</h4>
+            <select class="custom-select" style="width:95%;" id="theme">
+                <option value="1">Light</option>
+                <option value="2">Dark</option>
+            </select>
+        </div>
+    </div>
+	<div style="margin-top:1em;"></div>
+    <p>For LOTS more settings, please view /settings and /set on discord!</p>
+</div>
+
+<button type="button" class="btn btn-primary" style="margin-right:4em; margin-top:0.2em; float: right;" id="save">Save</button>
+
+<div style="margin-top:4em;"></div>
+
+<div class="container-fluid"><div class="row"><div class="col-md-12 footer"><center><p>Copyright © UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated. <strong><a href="https://ultimatebot.pw/tos" target="_blank">TOS</a></strong> | <strong><a href="https://ultimatebot.pw/support" target="_blank">Support</a></strong></p></center></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

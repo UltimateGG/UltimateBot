@@ -1,0 +1,122 @@
+{
+	"tpa": "^(.*) has requested (?:to teleport to you|that you teleport to them)\\. FLAGS:g",
+	
+	"checkedmsg": "^\\[?.*\\] \\((.*) . me\\) \\\/?checked FLAGS:i",
+	
+	"wallscheckedmsg": "^\\[?.*\\] \\((.*) . me\\) \\\/?walls FLAGS:i",
+	
+	"bufferscheckedmsg": "^\\[?.*\\] \\((.*) . me\\) \\\/?buffers FLAGS:i",
+	
+	"weewoomsg": "^\\[?.*\\] \\((.*) . me\\) \\\/?weewoo FLAGS:i",
+	
+	"safemsg": "^\\[?.*\\] \\((.*) . me\\) \\\/?safe FLAGS:i",
+	
+	"paidmsg": "^\\$[0-9]*.?[0-9]* has been received from .* FLAGS:",
+	
+	"moneysent": "^\\$[0-9]*.?[0-9]* has been sent to .*",
+	
+	"link": "^\\[?.*\\] \\(.* . me\\) link .* FLAGS:i",
+	
+	"linkusername": "^\\[?.*\\] \\((.*) . me\\) link .* FLAGS:i",
+	
+	"linkkey": "^\\[?.*\\] \\(.* . me\\) link (.*) FLAGS:i",
+	
+	"tfa": "^\\(!\\) You need to enter your 2fa code .* FLAGS:i",
+	
+	"raideventwarn": "^\\*\\*\\* RAID EVENT STARTING IN (.*) FLAGS:gim",
+	
+	"basicmsg": "^\\[?.*\\] \\(.* . me\\) .* FLAGS:i",
+	
+	"usernameIndex": 1,
+	"msgIndex": 4,
+	"usernameMoneySentIndex": 5,
+	"usernameMoneyReceivedIndex": 5,
+	"actualMoneyIndex": 0,
+	
+	"ftopCommand": "/f top",
+	"fListCommand": "/f list %page%",
+	"payCommand": "/pay %username% %amount%",
+	"payCommandRequiresConfirmation": false,
+	"outpostCommand": "/outpost",
+	"outpostCheckIntervalMs": 15000,
+	"fwhoCommand": "/f f %faction%",
+	"fKickCommand": "/f kick %user%",
+	"fInviteCommand": "/f invite %user%",
+	
+	"fTopPlace": "#[0-9][0-9]? - (.*) - (.*)",
+	
+	"ftopStartIncludes": "Faction Worth | Hover",
+	"noFtopStartLine": true,
+	"ftopPlaceIncludes": [
+		"-",
+		"$"
+	],
+	
+	"flistStartIncludes": "online factions",
+	"noFlistStartLine": false,
+	"flistIncludes": [
+		"/",
+		"Power"
+	],
+	
+	"fWhoIncludes": [
+		"_____.[",
+		"description:",
+		"leader:",
+		"created:",
+		"land |",
+		"allies (",
+		"truces (",
+		"members online (",
+		"members offline (",
+		"alts online (",
+		"alts offline (",
+		"shield active",
+		"strikes:"
+	],
+	
+	"outpostOpensAsGUI": true,
+	"windowTitleIncludes": "TheArchon Outpost",
+	
+	"outpostItem1Slot": 31,
+	
+	"outpost1LoreLines": [
+			0,
+			1,
+			2,
+			3,
+			4,
+			6,
+			7,
+			8,
+			9,
+			10			
+	],
+	
+	"outpostHasItem2": false,
+	"outpost2LoreLines": [
+			0,
+			1,
+			2,
+			3,
+			4,
+			6,
+			7,
+			8,
+			9,
+			10
+	],	
+	
+	"tpsCommand": "/tps",
+	"tpsRegex": "TPS: (.*) FLAGS:i",
+	
+	"graceCommand": "/grace",
+	"graceInfoIncludes": "grace period",
+	
+	"blacklistedPublicChatPhrases": [
+		"to use /vote",
+		"Welcome, "
+	],
+	
+	"debug": false
+}

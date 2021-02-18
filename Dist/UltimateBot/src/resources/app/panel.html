@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>UltimateBot</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  	<link rel='icon' href='./panel/favicon.png' type='image/x-icon'/>
+    <script src="./panel/js.js"></script>
+  	<link rel='stylesheet' href='./panel/style.css'/>
+  </head>
+  <body>
+    <div style="margin-top:1em;"></div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h3 style="float:left; margin-right:0em;">Console<br><small style="font-size:12px;">Alts Online: <span id="altText">0</span>/5</small><br><small style="font-size:12px;">@ <span id="serverIp"></span></small></h3>
+		  <button type="button" class="btn btn-secondary" id="settings" style="margin-top:0.4em; float:left !important; margin-right:1em;">Settings</button>
+		  <button type="button" class="btn btn-primary" style="margin-top:0.4em; float:left !important; margin-right:1em;" id="appqEditor">App Questions</button>
+          
+		  <img src="./panel/update1.png" width="4%" id="updateLog" class="hoverStyle" style="float:right;" hidden>
+		  
+		  <div id="changeLogDiv" style="width: 45%; word-wrap: break-word; border-radius: 10px; border: solid 2px #000; padding:1em; background-color:#cccccc; color:#000; z-index:1000; position:absolute; top:50; right:30;" hidden>
+			<h4 id="changeLogTitleHeader"></h4>
+			<small>Update(s) occurred while you were away.</small>
+			<div style="margin-left:0.5em; word-wrap: break-word;" id ="changesDiv">
+			</div>
+			
+			<button type="button" class="btn btn-primary" style="width:100%;" id="closeChangeLog">Close</button>
+		  </div>
+		  
+		  <button type="button" class="btn btn-danger actButtonsD" style="margin-right:1em;" id="kill">Kill</button>
+          <button type="button" class="btn btn-primary actButtons" style="margin-right:1em;" id="restart">Restart</button>
+          <button type="button" class="btn btn-primary actButtons" style="margin-right:1em;" id="stop">Stop</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.2em;"></div>
+
+    <div class="console" style="background-color:#000; width:97%; height:70%; margin:1em 1em 0em 1em; padding:1em;" id='consoleText'>Started!<br></div>
+    <div class="consoleCmd" style="background-color:#000; width:97%; height:12.7%; padding:0.8em 0em 0.8em 0em; margin:0em 1em 1em 1em;" id='consoleCmd'><hr>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control sdark" aria-label="Command" maxlength="160" id="sendCmd">
+        <div class="input-group-append" style="z-index: 1000;">
+          <select class="custom-select" style="width:100%; margin:0; background-color:#28A745; border:none;" id="sendfor">
+            <option value="N" disabled selected>Send For</option>
+            <option value="0" id="alt0">Alt0 -</option>
+            <option value="1" id="alt1">Alt1 -</option>
+            <option value="2" id="alt2">Alt2 -</option>
+            <option value="3" id="alt3">Alt3 -</option>
+            <option value="4" id="alt4">Alt4 -</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" style="margin-left:1em;" id="clear">Clear Log</button>
+
+    <div style="margin-top:2em;"></div>
+
+    <div class="container-fluid" id="footerR"><div class="row"><div class="col-md-12 footer"><center><p>Copyright © UltimateBot 2020 - Unauthorized redistribution of this application may result in legal action, fees, or your license being terminated. <strong><a href="https://ultimatebot.pw/tos" target="_blank">TOS</a></strong> | <strong><a href="https://ultimatebot.pw/support" target="_blank">Support</a></strong></p></center></div></div></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

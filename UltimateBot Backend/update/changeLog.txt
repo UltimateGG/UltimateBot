@@ -1,0 +1,4 @@
+Update v2.0: 
+
+- Final update. Fixed bugs for the future
+- See UltimateBot discord for more info.
